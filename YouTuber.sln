@@ -9,19 +9,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{249254B3
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{15F4EB79-6C86-4A1B-8CD1-F54E76631667}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YouTuber", "src\YouTuber\YouTuber.csproj", "{C8056D04-C76E-48DC-B9C4-177824FC6AD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YouTuber", "src\YouTuber\YouTuber.csproj", "{C8056D04-C76E-48DC-B9C4-177824FC6AD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.YouTube.Module", "src\core\Core.YouTube.Module\Core.YouTube.Module.csproj", "{160854E3-796B-42BF-B0BD-DA31518E8DE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.YouTube.Module", "src\core\Core.YouTube.Module\Core.YouTube.Module.csproj", "{160854E3-796B-42BF-B0BD-DA31518E8DE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Scheduler.Module", "src\core\Core.Scheduler.Module\Core.Scheduler.Module.csproj", "{23FEBDE0-F167-4DE5-90D4-4E933172E81D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Scheduler.Module", "src\core\Core.Scheduler.Module\Core.Scheduler.Module.csproj", "{23FEBDE0-F167-4DE5-90D4-4E933172E81D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{6CACDB74-6902-463D-B7F2-0F06E04360F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Scheduler.Module.Tests", "tests\core\Core.Scheduler.Module.Tests\Core.Scheduler.Module.Tests.csproj", "{23BB5E06-9C54-47C3-BB06-2654B3094308}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Scheduler.Module.Tests", "tests\core\Core.Scheduler.Module.Tests\Core.Scheduler.Module.Tests.csproj", "{23BB5E06-9C54-47C3-BB06-2654B3094308}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.YouTube.Module.Tests", "tests\core\Core.YouTube.Module.Tests\Core.YouTube.Module.Tests.csproj", "{A57EECAE-6437-4EDA-89C7-5017E9BEE641}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.YouTube.Module.Tests", "tests\core\Core.YouTube.Module.Tests\Core.YouTube.Module.Tests.csproj", "{A57EECAE-6437-4EDA-89C7-5017E9BEE641}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YouTuber.Tests", "tests\YouTuber.Tests\YouTuber.Tests.csproj", "{28070036-0373-4CA6-BD95-AB71A6A0D13C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YouTuber.Tests", "tests\YouTuber.Tests\YouTuber.Tests.csproj", "{28070036-0373-4CA6-BD95-AB71A6A0D13C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "src\Shared\Shared.csproj", "{6102E6EB-15BA-4E22-AEC0-5FAF213B829D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,10 @@ Global
 		{28070036-0373-4CA6-BD95-AB71A6A0D13C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28070036-0373-4CA6-BD95-AB71A6A0D13C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28070036-0373-4CA6-BD95-AB71A6A0D13C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6102E6EB-15BA-4E22-AEC0-5FAF213B829D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6102E6EB-15BA-4E22-AEC0-5FAF213B829D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6102E6EB-15BA-4E22-AEC0-5FAF213B829D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6102E6EB-15BA-4E22-AEC0-5FAF213B829D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +74,7 @@ Global
 		{23BB5E06-9C54-47C3-BB06-2654B3094308} = {6CACDB74-6902-463D-B7F2-0F06E04360F2}
 		{A57EECAE-6437-4EDA-89C7-5017E9BEE641} = {6CACDB74-6902-463D-B7F2-0F06E04360F2}
 		{28070036-0373-4CA6-BD95-AB71A6A0D13C} = {249254B3-3AB4-4D7B-9367-D2BE452FFFC0}
+		{6102E6EB-15BA-4E22-AEC0-5FAF213B829D} = {15F4EB79-6C86-4A1B-8CD1-F54E76631667}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C0FFD491-A255-4558-A4C5-59ECAC06A64F}
