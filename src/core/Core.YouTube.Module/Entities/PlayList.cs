@@ -53,7 +53,7 @@ namespace Core.YouTube.Module.Entities
 		/// <summary>
 		/// YouTube playlist's thumbnail.
 		/// </summary>
-		public Thumbnail Thumbnail { get; init; }
+		public Thumbnail? Thumbnail { get; init; }
 
 		/// <inheritdoc/>
 		public YTItemType ItemType => YTItemType.PlayList;

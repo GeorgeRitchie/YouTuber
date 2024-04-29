@@ -53,7 +53,7 @@ namespace Core.YouTube.Module.Entities
 		/// <summary>
 		/// YouTube video's thumbnail.
 		/// </summary>
-		public Thumbnail Thumbnail { get; init; }
+		public Thumbnail? Thumbnail { get; init; }
 
 		/// <summary>
 		/// YouTube video's duration.
