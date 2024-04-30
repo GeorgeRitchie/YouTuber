@@ -17,6 +17,7 @@
 
 using Core.YouTube.Module.Services;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Core.YouTube.Module
 {
@@ -32,8 +33,12 @@ namespace Core.YouTube.Module
 		/// <returns>The updated service collection.</returns>
 		public static IServiceCollection AddYouTubeModule(this IServiceCollection services)
 		{
+			// This is required to avoid any problems with YoutubeExplode provider on any device.
+			Environment.SetEnvironmentVariable("SLAVA_UKRAINI", "1");
+
 			// Adding YouTubeService
-			services.AddSingleton<IYouTubeService, YouTubeService>();
+			services.AddSingleton<IYouTubeService>(serviceProvider =>
+								new YouTubeService(serviceProvider.GetRequiredService<ILogger<YouTubeService>>(), new()));
 
 			return services;
 		}

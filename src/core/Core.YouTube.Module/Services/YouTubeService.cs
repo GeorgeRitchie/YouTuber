@@ -28,8 +28,11 @@ namespace Core.YouTube.Module.Services
 {
 	/// <inheritdoc cref="IYouTubeService"/>
 	/// <param name="logger">The logger instance used for logging.</param>
-	internal class YouTubeService(ILogger<YouTubeService> logger) : IYouTubeService
+	/// <param name="youtube">YouTube API provider.</param>
+	internal class YouTubeService(ILogger<YouTubeService> logger, YoutubeClient youtube) : IYouTubeService
 	{
+		private readonly HttpClient _httpClient = new();
+
 		/// <inheritdoc/>
 		public async Task<Result<IYTItem>> GetItemInfoAsync(string url, CancellationToken cancellationToken = default)
 		{
@@ -50,8 +53,6 @@ namespace Core.YouTube.Module.Services
 
 			try
 			{
-				var youtube = new YoutubeClient();
-
 				var playlist = await youtube.Playlists.GetAsync(url, cancellationToken);
 
 				var videos = await youtube.Playlists.GetVideosAsync(url, cancellationToken);
@@ -104,8 +105,6 @@ namespace Core.YouTube.Module.Services
 
 			try
 			{
-				var youtube = new YoutubeClient();
-
 				var videoInfo = await youtube.Videos.GetAsync(url, cancellationToken);
 
 				var streamManifest = await youtube.Videos.Streams.GetManifestAsync(videoInfo.Id, cancellationToken);
@@ -143,7 +142,7 @@ namespace Core.YouTube.Module.Services
 			}
 		}
 
-		private static async Task<ValueObjects.Thumbnail?> GetBiggestThumbnailAsync(IEnumerable<Thumbnail> thumbnailsList, CancellationToken cancellationToken = default)
+		private async Task<ValueObjects.Thumbnail?> GetBiggestThumbnailAsync(IEnumerable<Thumbnail> thumbnailsList, CancellationToken cancellationToken = default)
 		{
 			var thumbnail = thumbnailsList?.MaxBy(i => i.Resolution.Area);
 
@@ -153,14 +152,12 @@ namespace Core.YouTube.Module.Services
 			return new ValueObjects.Thumbnail(thumbnail.Url, await GetImageAsByteArrayAsync(thumbnail.Url, cancellationToken));
 		}
 
-		private static async Task<byte[]> GetImageAsByteArrayAsync(string? url, CancellationToken cancellationToken = default)
+		private async Task<byte[]> GetImageAsByteArrayAsync(string? url, CancellationToken cancellationToken = default)
 		{
 			if (string.IsNullOrWhiteSpace(url))
 				return [];
 
-			using var httpClient = new HttpClient();
-
-			var response = await httpClient.GetAsync(url, cancellationToken);
+			var response = await _httpClient.GetAsync(url, cancellationToken);
 
 			if (response.IsSuccessStatusCode == false)
 				return [];
