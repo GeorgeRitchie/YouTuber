@@ -32,16 +32,19 @@ namespace Core.YouTube.Module.Services
 	internal class YouTubeService(ILogger<YouTubeService> logger, YoutubeClient youtube) : IYouTubeService
 	{
 		private readonly HttpClient _httpClient = new();
+		private readonly ILogger<YouTubeService> logger = logger ?? throw new ArgumentNullException(nameof(logger));
+		private readonly YoutubeClient youtube = youtube ?? throw new ArgumentNullException(nameof(youtube));
 
 		/// <inheritdoc/>
 		public async Task<Result<IYTItem>> GetItemInfoAsync(string url, CancellationToken cancellationToken = default)
 		{
 			ArgumentException.ThrowIfNullOrWhiteSpace(url, nameof(url));
 
-			Result<IYTItem> result = (await GetPlayListInfoAsync(url, cancellationToken)).Map(playList => (IYTItem)playList);
+			// WARNING first try to pars url as video url, since some video url can be parsed as playlist url meanwhile they are video url.
+			Result<IYTItem> result = (await GetVideoInfoAsync(url, cancellationToken)).Map(video => (IYTItem)video);
 
 			if (result.IsSuccess == false)
-				result = (await GetVideoInfoAsync(url, cancellationToken)).Map(video => (IYTItem)video);
+				result = (await GetPlayListInfoAsync(url, cancellationToken)).Map(playList => (IYTItem)playList);
 
 			return result;
 		}
