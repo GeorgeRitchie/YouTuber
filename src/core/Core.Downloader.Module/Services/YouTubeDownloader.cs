@@ -44,8 +44,11 @@ namespace Core.Downloader.Module.Services
 		/// Creates an instance of <see cref="YouTubeDownloader"/>.
 		/// </summary>
 		/// <param name="logger">Logger for logging.</param>
+		/// <exception cref="ArgumentNullException">Thrown when <paramref name="logger"/> is <see langword="null"/>.</exception>
 		public YouTubeDownloader(ILogger<YouTubeDownloader> logger)
 		{
+			ArgumentNullException.ThrowIfNull(logger, nameof(logger));
+
 			_logger = logger;
 			youtube = new YoutubeClient();
 		}
@@ -111,12 +114,12 @@ namespace Core.Downloader.Module.Services
 
 					return;
 				}
-
+				
 				// This Module should not depend on YoutubeExplode based on architecture best practices
 				// But since we use YoutubeExplode lib and there was recommendation to use provided downloader method,
 				// We will deliberately follow YoutubeExplode authors' recommendation despite of architecture rules.
 				await youtube.Videos.Streams.DownloadAsync(steamToDownload, outputPath, progress, cancellationToken);
-
+				
 				DownloadCompletedEvent?.Invoke(requestId);
 
 				_logger.LogFormattedDebug($"{nameof(YouTubeDownloader)}.{nameof(DownloadMediaAsync)}",
