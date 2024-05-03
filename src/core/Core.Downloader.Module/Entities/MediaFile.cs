@@ -94,6 +94,13 @@ namespace Core.Downloader.Module.Entities
 		/// <summary>
 		/// Initializes a new instance of the <see cref="MediaFile"/> class.
 		/// </summary>
+		/// <remarks>Used only by EF Core.</remarks>
+		private MediaFile()
+		{ }
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="MediaFile"/> class.
+		/// </summary>
 		/// <param name="youTubeId">The YouTube identifier of the media file.</param>
 		/// <param name="url">The URL of the media file.</param>
 		/// <param name="title">The title of the media file.</param>

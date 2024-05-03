@@ -21,9 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YouTuber.Tests", "tests\You
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "src\Shared\Shared.csproj", "{6102E6EB-15BA-4E22-AEC0-5FAF213B829D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Downloader.Module", "src\core\Core.Downloader.Module\Core.Downloader.Module.csproj", "{0CA478F3-E334-4B54-8BD8-D938C09F35B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Downloader.Module", "src\core\Core.Downloader.Module\Core.Downloader.Module.csproj", "{0CA478F3-E334-4B54-8BD8-D938C09F35B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Downloader.Module.Tests", "tests\core\Core.Downloader.Module.Tests\Core.Downloader.Module.Tests.csproj", "{EE7B1856-9349-4F2A-B65C-FDA3247BB950}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Downloader.Module.Tests", "tests\core\Core.Downloader.Module.Tests\Core.Downloader.Module.Tests.csproj", "{EE7B1856-9349-4F2A-B65C-FDA3247BB950}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppStubStartUp", "src\ConsoleAppStubStartUp\ConsoleAppStubStartUp.csproj", "{1977CBD4-7718-43C0-9A43-CB097644D2E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,10 @@ Global
 		{EE7B1856-9349-4F2A-B65C-FDA3247BB950}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE7B1856-9349-4F2A-B65C-FDA3247BB950}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE7B1856-9349-4F2A-B65C-FDA3247BB950}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1977CBD4-7718-43C0-9A43-CB097644D2E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1977CBD4-7718-43C0-9A43-CB097644D2E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1977CBD4-7718-43C0-9A43-CB097644D2E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1977CBD4-7718-43C0-9A43-CB097644D2E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +81,7 @@ Global
 		{6102E6EB-15BA-4E22-AEC0-5FAF213B829D} = {15F4EB79-6C86-4A1B-8CD1-F54E76631667}
 		{0CA478F3-E334-4B54-8BD8-D938C09F35B5} = {15F4EB79-6C86-4A1B-8CD1-F54E76631667}
 		{EE7B1856-9349-4F2A-B65C-FDA3247BB950} = {6CACDB74-6902-463D-B7F2-0F06E04360F2}
+		{1977CBD4-7718-43C0-9A43-CB097644D2E5} = {46C29306-0E59-445E-96DE-C3D24AFA9D4F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C0FFD491-A255-4558-A4C5-59ECAC06A64F}
