@@ -17,17 +17,20 @@
 
 using Core.Downloader.Module.Configurations;
 using Core.Downloader.Module.Data;
+using Core.Downloader.Module.Entities;
 using Core.Downloader.Module.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Shared.Data;
+using Shared.Interfaces.Repository;
 
 namespace Core.Downloader.Module
 {
-    /// <summary>
-    /// Contains extension methods for the <see cref="IServiceCollection"/> interface.
-    /// </summary>
-    public static class DependencyInjection
+	/// <summary>
+	/// Contains extension methods for the <see cref="IServiceCollection"/> interface.
+	/// </summary>
+	public static class DependencyInjection
 	{
 		/// <summary>
 		/// Initializes Downloader module and adds required services into DI.
@@ -52,6 +55,16 @@ namespace Core.Downloader.Module
 				var appSettings = serviceProvider.GetService<IOptions<DownloaderAppSettings>>()!.Value;
 				options.UseSqlite(appSettings.DbConnectionString);
 			});
+
+			// Adding Database Interface
+			services.AddScoped<IDataBase, DataBase<DownloaderDbContext>>();
+
+			// Adding Repositories
+			services.AddScoped<IRepository<ScheduledDownload>, Repository<ScheduledDownload, DownloaderDbContext>>();
+			services.AddScoped<IReadOnlyRepository<ScheduledDownload>>(serviceProvider =>
+													serviceProvider.GetRequiredService<IRepository<ScheduledDownload>>());
+			services.AddScoped<IWriteOnlyRepository<ScheduledDownload>>(serviceProvider =>
+													serviceProvider.GetRequiredService<IRepository<ScheduledDownload>>());
 
 			return services;
 		}
