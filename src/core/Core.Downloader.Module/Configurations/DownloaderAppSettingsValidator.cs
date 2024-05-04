@@ -22,12 +22,12 @@ namespace Core.Downloader.Module.Configurations
 	/// <summary>
 	/// Represents validator for <see cref="DownloaderAppSettings"/>.
 	/// </summary>
-	public sealed class DownloaderAppSettingsConfigurations : AbstractValidator<DownloaderAppSettings>
+	public sealed class DownloaderAppSettingsValidator : AbstractValidator<DownloaderAppSettings>
 	{
 		/// <summary>
-		/// Initializes a new instance of the <see cref="DownloaderAppSettingsConfigurations"/> class.
+		/// Initializes a new instance of the <see cref="DownloaderAppSettingsValidator"/> class.
 		/// </summary>
-		public DownloaderAppSettingsConfigurations()
+		public DownloaderAppSettingsValidator()
 		{
 			RuleFor(i => i.DbConnectionString).NotEmpty();
 		}
