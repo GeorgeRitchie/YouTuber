@@ -15,26 +15,21 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace Core.Downloader.Module.Configurations
+namespace Core.Downloader.Module.Entities
 {
 	/// <summary>
-	/// Represents Downloader module app settings.
+	/// Represents an item currently downloading.
 	/// </summary>
-	public sealed class DownloaderAppSettings
+	public interface IDownloadingItem
 	{
 		/// <summary>
-		/// Gets Downloader module app settings section name.
+		/// Gets information about currently downloading item.
 		/// </summary>
-		public const string DownloaderAppSettingsSection = "DownloaderSettings";
+		ScheduledDownload Download { get; }
 
 		/// <summary>
-		/// Gets or sets database connection string.
+		/// Raised when the download progress changes.
 		/// </summary>
-		public string DbConnectionString { get; set; } = string.Empty;
-
-		/// <summary>
-		/// Gets or sets path for downloaded files directory.
-		/// </summary>
-		public string DownloadedFilesDirectory { get; set; } = string.Empty;
+		event Action<double>? ProgressChangedEvent;
 	}
 }

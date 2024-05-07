@@ -30,6 +30,7 @@ namespace Core.Downloader.Module.Configurations
 		public DownloaderAppSettingsValidator()
 		{
 			RuleFor(i => i.DbConnectionString).NotEmpty();
+			RuleFor(i => i.DownloadedFilesDirectory).NotEmpty();
 		}
 	}
 }

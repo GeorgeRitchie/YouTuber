@@ -66,6 +66,11 @@ namespace Core.Downloader.Module
 			services.AddScoped<IWriteOnlyRepository<ScheduledDownload>>(serviceProvider =>
 													serviceProvider.GetRequiredService<IRepository<ScheduledDownload>>());
 
+			// Adding download services
+			services.AddSingleton<ScheduledDownloadManager>();
+			services.AddSingleton<CurrentDownloadManager>();
+			services.AddSingleton<IDownloadManager, DownloadManager>();
+
 			return services;
 		}
 
