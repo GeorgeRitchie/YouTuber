@@ -67,8 +67,8 @@ namespace Core.Downloader.Module
 													serviceProvider.GetRequiredService<IRepository<ScheduledDownload>>());
 
 			// Adding download services
-			services.AddSingleton<ScheduledDownloadManager>();
-			services.AddSingleton<CurrentDownloadManager>();
+			services.AddSingleton<IScheduledDownloadManager, ScheduledDownloadManager>();
+			services.AddSingleton<ICurrentDownloadManager, CurrentDownloadManager>();
 			services.AddSingleton<IDownloadManager, DownloadManager>();
 
 			return services;

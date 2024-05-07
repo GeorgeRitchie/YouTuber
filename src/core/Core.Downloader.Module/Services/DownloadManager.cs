@@ -29,13 +29,13 @@ namespace Core.Downloader.Module.Services
 	/// <param name="currentDownloadManager">Manager of instant downloads.</param>
 	/// <param name="logger">Logger for logging operations.</param>
 	internal sealed class DownloadManager(
-		ScheduledDownloadManager scheduledDownloadManager,
-		CurrentDownloadManager currentDownloadManager,
+		IScheduledDownloadManager scheduledDownloadManager,
+		ICurrentDownloadManager currentDownloadManager,
 		ILogger<DownloadManager> logger) : IDownloadManager
 	{
 		private readonly ILogger<DownloadManager> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-		private readonly ScheduledDownloadManager _scheduledDownloadManager = scheduledDownloadManager ?? throw new ArgumentNullException(nameof(scheduledDownloadManager));
-		private readonly CurrentDownloadManager _currentDownloadManager = currentDownloadManager ?? throw new ArgumentNullException(nameof(currentDownloadManager));
+		private readonly IScheduledDownloadManager _scheduledDownloadManager = scheduledDownloadManager ?? throw new ArgumentNullException(nameof(scheduledDownloadManager));
+		private readonly ICurrentDownloadManager _currentDownloadManager = currentDownloadManager ?? throw new ArgumentNullException(nameof(currentDownloadManager));
 
 		/// <inheritdoc/>
 		public IReadOnlyList<ScheduledDownload> ScheduledItems => _scheduledDownloadManager.ScheduledItems;

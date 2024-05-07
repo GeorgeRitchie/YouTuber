@@ -29,23 +29,18 @@ namespace Core.Downloader.Module.Services
 	/// <param name="repository">Repository for handling <see cref="ScheduledDownload"/> entities.</param>
 	/// <param name="logger">Logger for logging operations.</param>
 	/// <exception cref="ArgumentNullException">Thrown if any parameter is <see langword="null"/>.</exception>
-	internal sealed class ScheduledDownloadManager(IDataBase dataBase, IRepository<ScheduledDownload> repository, ILogger<ScheduledDownloadManager> logger)
+	internal sealed class ScheduledDownloadManager(IDataBase dataBase,
+											IRepository<ScheduledDownload> repository,
+											ILogger<ScheduledDownloadManager> logger) : IScheduledDownloadManager
 	{
 		private readonly ILogger<ScheduledDownloadManager> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 		private readonly IDataBase _dataBase = dataBase ?? throw new ArgumentNullException(nameof(dataBase));
 		private readonly IRepository<ScheduledDownload> _repository = repository ?? throw new ArgumentNullException(nameof(repository));
 
-		/// <summary>
-		/// Gets a list of all scheduled downloads.
-		/// </summary>
+		/// <inheritdoc/>
 		public IReadOnlyList<ScheduledDownload> ScheduledItems => _repository.GetAllAsNoTracking().ToList();
 
-		/// <summary>
-		/// Schedules a new download.
-		/// </summary>
-		/// <param name="item">The download item to schedule.</param>
-		/// <param name="cancellationToken">Token for cancelling the operation.</param>
-		/// <exception cref="ArgumentNullException">Thrown if the <paramref name="item"/> is <see langword="null"/>.</exception>
+		/// <inheritdoc/>
 		public async Task ScheduleDownloadAsync(ScheduledDownload item, CancellationToken cancellationToken = default)
 		{
 			ArgumentNullException.ThrowIfNull(item, nameof(item));
@@ -74,14 +69,10 @@ namespace Core.Downloader.Module.Services
 			}
 		}
 
-		/// <summary>
-		/// Cancels a scheduled download.
-		/// </summary>
-		/// <param name="id">The identifier of the download to cancel.</param>
-		/// <param name="cancellationToken">Token for cancelling the operation.</param>
+		/// <inheritdoc/>
 		public async Task CancelScheduleAsync(Guid id, CancellationToken cancellationToken = default)
 		{
-			var transaction = _dataBase.BeginTransaction();
+			var transaction = await _dataBase.BeginTransactionAsync(cancellationToken);
 
 			try
 			{

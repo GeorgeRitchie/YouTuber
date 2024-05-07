@@ -19,17 +19,28 @@ using Core.Downloader.Module.Configurations;
 using Core.Downloader.Module.Data;
 using Core.Downloader.Module.Entities;
 using Core.Downloader.Module.Services;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Shared.Interfaces.Repository;
 
 namespace Core.Downloader.Module.Tests
 {
+	public class ServiceRegistrationData : TheoryData<Type, Type, ServiceLifetime>
+	{
+		public ServiceRegistrationData()
+		{
+			Add(typeof(IDownloader), typeof(YouTubeDownloader), ServiceLifetime.Singleton);
+			Add(typeof(DownloaderDbContext), typeof(DownloaderDbContext), ServiceLifetime.Scoped);
+			Add(typeof(IDataBase), typeof(IDataBase), ServiceLifetime.Scoped);
+			Add(typeof(IRepository<ScheduledDownload>), typeof(IRepository<ScheduledDownload>), ServiceLifetime.Scoped);
+			Add(typeof(IDownloadManager), typeof(DownloadManager), ServiceLifetime.Singleton);
+		}
+	}
+
 	public class DependencyInjectionTests
 	{
-		[Fact]
-		public void AddDownloaderModule_Should_IncludeRequiredServicesCorrectly()
+		[Theory]
+		[ClassData(typeof(ServiceRegistrationData))]
+		public void AddDownloaderModule_Should_IncludeRequiredServicesCorrectly(Type serviceType, Type expectedType, ServiceLifetime expectedLifetime)
 		{
 			// Arrange
 			IServiceCollection services = new ServiceCollection().AddLogging(configure => configure.AddConsole());
@@ -39,31 +50,12 @@ namespace Core.Downloader.Module.Tests
 			services.AddDownloaderModule();
 			using var serviceProvider = services.BuildServiceProvider();
 
-			var downloaderService = serviceProvider.GetService<IDownloader>();
-			var downloaderServiceDescriptor = services.FirstOrDefault(i => i.ServiceType == typeof(IDownloader));
-
-			var dbContext = serviceProvider.GetService<DownloaderDbContext>();
-			var dbContextDescriptor = services.FirstOrDefault(i => i.ServiceType == typeof(DownloaderDbContext));
-
-			var database = serviceProvider.GetService<IDataBase>();
-			var databaseDescriptor = services.FirstOrDefault(i => i.ServiceType == typeof(IDataBase));
-
-			var scheduledDownloadRepository = serviceProvider.GetService<IRepository<ScheduledDownload>>();
-			var scheduledDownloadRepositoryDescriptor = services.FirstOrDefault(i =>
-																	i.ServiceType == typeof(IRepository<ScheduledDownload>));
+			var serviceInstance = serviceProvider.GetService(serviceType);
+			var serviceDescriptor = services.FirstOrDefault(i => i.ServiceType == serviceType);
 
 			// Assert
-			downloaderService.Should().BeAssignableTo<YouTubeDownloader>();
-			downloaderServiceDescriptor?.Lifetime.Should().Be(ServiceLifetime.Singleton);
-
-			dbContext.Should().BeAssignableTo<DownloaderDbContext>();
-			dbContextDescriptor?.Lifetime.Should().Be(ServiceLifetime.Scoped);
-
-			database.Should().BeAssignableTo<IDataBase>();
-			databaseDescriptor?.Lifetime.Should().Be(ServiceLifetime.Scoped);
-
-			scheduledDownloadRepository.Should().BeAssignableTo<IRepository<ScheduledDownload>>();
-			scheduledDownloadRepositoryDescriptor?.Lifetime.Should().Be(ServiceLifetime.Scoped);
+			serviceInstance.Should().BeAssignableTo(expectedType);
+			serviceDescriptor?.Lifetime.Should().Be(expectedLifetime);
 		}
 	}
 }

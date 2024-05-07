@@ -28,7 +28,7 @@ namespace Core.Downloader.Module.Services
 	/// <summary>
 	/// Manages ongoing downloads.
 	/// </summary>
-	internal class CurrentDownloadManager
+	internal sealed class CurrentDownloadManager : ICurrentDownloadManager
 	{
 		private readonly ILogger<CurrentDownloadManager> _logger;
 		private readonly IDownloader _downloader;
@@ -36,9 +36,7 @@ namespace Core.Downloader.Module.Services
 
 		private readonly List<DownloadingItem> _downloadingItems = [];
 
-		/// <summary>
-		/// Gets a list of currently downloading items.
-		/// </summary>
+		/// <inheritdoc/>
 		public IReadOnlyList<IDownloadingItem> DownloadingItems => _downloadingItems;
 
 		/// <summary>
@@ -87,10 +85,7 @@ namespace Core.Downloader.Module.Services
 									error);
 		}
 
-		/// <summary>
-		/// Cancels a download by its identifier.
-		/// </summary>
-		/// <param name="id">Identifier of the download to cancel.</param>
+		/// <inheritdoc/>
 		public void CancelDownload(Guid id)
 		{
 			var downloadingItem = _downloadingItems.FirstOrDefault(i => i.Download.Id == id);
@@ -105,16 +100,7 @@ namespace Core.Downloader.Module.Services
 			}
 		}
 
-		/// <summary>
-		/// Starts a download for a scheduled item.
-		/// </summary>
-		/// <param name="item">The scheduled download item.</param>
-		/// <param name="progressEventHandler">Progress event handler.</param>
-		/// <param name="cancellationToken">Cancellation token.</param>
-		/// <exception cref="ArgumentNullException">
-		/// Thrown if the <paramref name="item"/>, <paramref name="item.MediaFile"/>, 
-		/// <paramref name="item.MediaFile.Stream"/>, <paramref name="item.MediaFile.YouTubeId"/> is <see langword="null"/>.
-		/// </exception>
+		/// <inheritdoc/>
 		public Task StartDownloadAsync(ScheduledDownload item,
 										Action<double>? progressEventHandler = null,
 										CancellationToken cancellationToken = default)

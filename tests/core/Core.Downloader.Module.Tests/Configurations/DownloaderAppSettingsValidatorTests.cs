@@ -27,18 +27,42 @@ namespace Core.Downloader.Module.Tests.Configurations
 			Add(new()
 			{
 				DbConnectionString = null!,
+				DownloadedFilesDirectory = "Some value",
 			});
 
 			// When DbConnectionString is string.Empty
 			Add(new()
 			{
 				DbConnectionString = string.Empty,
+				DownloadedFilesDirectory = "Some value",
 			});
 
 			// When DbConnectionString is white-space string
 			Add(new()
 			{
 				DbConnectionString = "     ",
+				DownloadedFilesDirectory = "Some value",
+			});
+
+			// When DownloadedFilesDirectory is null
+			Add(new()
+			{
+				DbConnectionString = "Some value",
+				DownloadedFilesDirectory = null!,
+			});
+
+			// When DownloadedFilesDirectory is string.Empty
+			Add(new()
+			{
+				DbConnectionString = "Some value",
+				DownloadedFilesDirectory = string.Empty,
+			});
+
+			// When DownloadedFilesDirectory is white-space string
+			Add(new()
+			{
+				DbConnectionString = "Some value",
+				DownloadedFilesDirectory = "     ",
 			});
 		}
 	}
@@ -67,6 +91,7 @@ namespace Core.Downloader.Module.Tests.Configurations
 			var appSettings = new DownloaderAppSettings()
 			{
 				DbConnectionString = "some value",
+				DownloadedFilesDirectory = "Some value",
 			};
 
 			// Act
