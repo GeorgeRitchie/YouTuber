@@ -1,4 +1,4 @@
-/* 
+﻿/* 
 	YouTuber
 	Copyright (c) 2024, Sharifjon Abdulloev.
 
@@ -15,6 +15,18 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-global using FluentAssertions;
-global using Moq;
-global using Xunit;
+using System.Reflection;
+
+namespace Core.Downloader.Module
+{
+	/// <summary>
+	/// Represents the Core.Downloader.Module assembly reference.
+	/// </summary>
+	public static class AssemblyReference
+	{
+		/// <summary>
+		/// The assembly.
+		/// </summary>
+		public static readonly Assembly Assembly = typeof(AssemblyReference).Assembly;
+	}
+}

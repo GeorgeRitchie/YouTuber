@@ -1,4 +1,4 @@
-/* 
+﻿/* 
 	YouTuber
 	Copyright (c) 2024, Sharifjon Abdulloev.
 
@@ -15,6 +15,20 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-global using FluentAssertions;
-global using Moq;
-global using Xunit;
+using Shared.Errors;
+
+namespace Core.YouTube.Module.Errors
+{
+	/// <summary>
+	/// Represents a wrapper for all errors in YouTube module.
+	/// </summary>
+	public static class YouTubeModuleErrors
+	{
+		/// <summary>
+		/// Represents an invalid url error.
+		/// </summary>
+		/// <param name="details">Description for error.</param>
+		/// <returns>An instance of <see cref="Error"/>.</returns>
+		public static Error InvalidUrlError(string details) => new("InvalidUrl", details);
+	}
+}

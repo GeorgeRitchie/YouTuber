@@ -1,4 +1,4 @@
-/* 
+﻿/* 
 	YouTuber
 	Copyright (c) 2024, Sharifjon Abdulloev.
 
@@ -15,6 +15,24 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-global using FluentAssertions;
-global using Moq;
-global using Xunit;
+using Shared.Primitives;
+
+namespace Core.YouTube.Module.Enumerations
+{
+	/// <summary>
+	/// Represents the YouTube item types enumeration.
+	/// </summary>
+	public sealed class YTItemType : Enumeration<YTItemType>
+	{
+		public static YTItemType PlayList = new(nameof(PlayList), 0);
+		public static YTItemType Video = new(nameof(Video), 1);
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="YTItemType"/> class.
+		/// </summary>
+		/// <param name="name">Enumeration name.</param>
+		/// <param name="value">Enumeration value.</param>
+		private YTItemType(string name, int value) : base(name, value)
+		{ }
+	}
+}

@@ -1,4 +1,4 @@
-/* 
+﻿/* 
 	YouTuber
 	Copyright (c) 2024, Sharifjon Abdulloev.
 
@@ -15,6 +15,13 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-global using FluentAssertions;
-global using Moq;
-global using Xunit;
+namespace Shared.Interfaces.Repository
+{
+	/// <summary>
+	/// Represents repository interface.
+	/// </summary>
+	/// <typeparam name="TEntity">The entity type this repository manages.</typeparam>
+	public interface IRepository<TEntity> : IReadOnlyRepository<TEntity>, IWriteOnlyRepository<TEntity> where TEntity : class
+	{
+	}
+}

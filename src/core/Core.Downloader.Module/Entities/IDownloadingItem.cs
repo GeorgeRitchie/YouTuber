@@ -1,4 +1,4 @@
-/* 
+﻿/* 
 	YouTuber
 	Copyright (c) 2024, Sharifjon Abdulloev.
 
@@ -15,6 +15,21 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-global using FluentAssertions;
-global using Moq;
-global using Xunit;
+namespace Core.Downloader.Module.Entities
+{
+	/// <summary>
+	/// Represents an item currently downloading.
+	/// </summary>
+	public interface IDownloadingItem
+	{
+		/// <summary>
+		/// Gets information about currently downloading item.
+		/// </summary>
+		ScheduledDownload Download { get; }
+
+		/// <summary>
+		/// Raised when the download progress changes.
+		/// </summary>
+		event Action<double>? ProgressChangedEvent;
+	}
+}

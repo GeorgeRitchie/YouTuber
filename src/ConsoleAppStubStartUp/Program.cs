@@ -1,4 +1,4 @@
-/* 
+﻿/* 
 	YouTuber
 	Copyright (c) 2024, Sharifjon Abdulloev.
 
@@ -15,6 +15,12 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-global using FluentAssertions;
-global using Moq;
-global using Xunit;
+/*
+
+	Since some tools, like EF Core migration tool, cannot be run using projects like MAUI, we use this stub startup project
+	to run those tools.
+
+	For more information see https://learn.microsoft.com/en-us/ef/core/cli/powershell#other-target-frameworks
+*/
+
+Console.WriteLine("Hello, World!");

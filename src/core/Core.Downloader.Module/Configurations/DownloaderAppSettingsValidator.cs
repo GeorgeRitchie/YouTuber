@@ -1,4 +1,4 @@
-/* 
+﻿/* 
 	YouTuber
 	Copyright (c) 2024, Sharifjon Abdulloev.
 
@@ -15,6 +15,22 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-global using FluentAssertions;
-global using Moq;
-global using Xunit;
+using FluentValidation;
+
+namespace Core.Downloader.Module.Configurations
+{
+	/// <summary>
+	/// Represents validator for <see cref="DownloaderAppSettings"/>.
+	/// </summary>
+	public sealed class DownloaderAppSettingsValidator : AbstractValidator<DownloaderAppSettings>
+	{
+		/// <summary>
+		/// Initializes a new instance of the <see cref="DownloaderAppSettingsValidator"/> class.
+		/// </summary>
+		public DownloaderAppSettingsValidator()
+		{
+			RuleFor(i => i.DbConnectionString).NotEmpty();
+			RuleFor(i => i.DownloadedFilesDirectory).NotEmpty();
+		}
+	}
+}

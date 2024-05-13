@@ -18,6 +18,14 @@ namespace YouTuber
 #if DEBUG
 			builder.Logging.AddDebug();
 #endif
+			// TODO add IOption patterns for each module, see 
+			/*
+
+			services.AddOptions<DownloaderAppSettings>()
+				.BindConfiguration(DownloaderAppSettings.DownloaderAppSettingsSection)
+				.ValidateFluentValidation()
+				.ValidateOnStart();
+			*/
 
 			return builder.Build();
 		}
